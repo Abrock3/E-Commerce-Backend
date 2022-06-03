@@ -40,6 +40,10 @@ router.post("/", async (req, res) => {
         { tag_name: req.body.tag_name },
         { fields: ["tag_name"] }
       );
+      if (!postResponse) {
+        res.status(400).json({ message: "Tag was not added." });
+        return;
+      }
       res.status(200).json(postResponse);
     } else {
       res.status(400).json({
@@ -63,6 +67,10 @@ router.put("/:id", async (req, res) => {
           },
         }
       );
+      if (!putResponse) {
+        res.status(404).json({ message: "No category found with this id." });
+        return;
+      }
       res.status(200).json(putResponse);
     } else {
       res.status(400).json({
@@ -82,6 +90,10 @@ router.delete("/:id", async (req, res) => {
         id: req.params.id,
       },
     });
+    if (!deleteResponse) {
+      res.status(404).json({ message: "No category found with this id." });
+      return;
+    }
     res.status(200).json(deleteResponse);
   } catch (err) {
     res.status(500).json(err);

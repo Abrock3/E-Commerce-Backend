@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
     });
     if (!allCategoryData) {
       res.status(404).json({ message: "No categories found." });
+      return;
     }
     res.status(200).json(allCategoryData);
   } catch (err) {
@@ -39,6 +40,10 @@ router.post("/", async (req, res) => {
         { category_name: req.body.category_name },
         { fields: ["category_name"] }
       );
+      if (!postResponse) {
+        res.status(400).json({ message: "Category was not added." });
+        return;
+      }
       res.status(200).json(postResponse);
     } else {
       res.status(400).json({
@@ -62,6 +67,10 @@ router.put("/:id", async (req, res) => {
           },
         }
       );
+      if (!putResponse) {
+        res.status(404).json({ message: "No category found with this id." });
+        return;
+      }
       res.status(200).json(putResponse);
     } else {
       res.status(400).json({
@@ -81,6 +90,10 @@ router.delete("/:id", async (req, res) => {
         id: req.params.id,
       },
     });
+    if (!deleteResponse) {
+      res.status(404).json({ message: "No category found with this id." });
+      return;
+    }
     res.status(200).json(deleteResponse);
   } catch (err) {
     res.status(500).json(err);
