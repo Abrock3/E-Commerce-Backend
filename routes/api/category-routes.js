@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
     } else {
       res.status(400).json({
         message:
-          "The client didn't specify a category in the body, or didn't label the attribute as 'category_name'",
+          "The client didn't specify a category in the body, or didn't label the property correctly",
       });
     }
   } catch (err) {
@@ -50,12 +50,42 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
-  // update a category by its `id` value
+router.put("/:id", async (req, res) => {
+  try {
+    if (req.body.category_name) {
+      await Category.update(
+        { category_name: req.body.category_name },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+      res.status(200).json({ message: "Category updated!" });
+    } else {
+      res.status(400).json({
+        message:
+          "The client didn't include content in the body, or didn't label the property correctly",
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-router.delete("/:id", (req, res) => {
-  // delete a category by its `id` value
+router.delete("/:id", async (req, res) => {
+  try {
+    await Category.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res
+      .status(200)
+      .json({ message: `Category number ${req.params.id} has been deleted.` });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
