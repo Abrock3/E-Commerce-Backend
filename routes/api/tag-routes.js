@@ -2,10 +2,11 @@ const router = require("express").Router();
 const { Tag, Product, ProductTag } = require("../../models");
 
 // The `/api/tags` endpoint
-
+// get all tags
 router.get("/", async (req, res) => {
   try {
     const allTagData = await Tag.findAll({
+      // will create a join in the SQL query that will include all products that have that tag
       include: [{ model: Product }],
     });
     res.status(200).json(allTagData);
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// get one tag by id
 router.get("/:id", async (req, res) => {
   try {
     const singleTagData = await Tag.findByPk(req.params.id, {
@@ -29,6 +30,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// add a tag
 router.post("/", async (req, res) => {
   try {
     if (req.body.tag_name) {
@@ -52,8 +54,10 @@ router.post("/", async (req, res) => {
   }
 });
 
+// change a tag's name by id
 router.put("/:id", async (req, res) => {
   try {
+    // used an if statement to verify whether tag_name was truthy and provided a verbose response if it wasn't (see the else below)
     if (req.body.tag_name) {
       const putResponse = await Tag.update(
         { tag_name: req.body.tag_name },
@@ -79,6 +83,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// delete a tag by id
 router.delete("/:id", async (req, res) => {
   try {
     const deleteResponse = await Tag.destroy({

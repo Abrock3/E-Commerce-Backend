@@ -7,8 +7,10 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 router.get("/", async (req, res) => {
   try {
     const allProductData = await Product.findAll({
+      // this line of code will create joins in the SQL query that will include Tag and Category data, matched from tag_id and category_id
       include: [{ model: Category }, { model: Tag }],
     });
+    // if no errors are encountered (triggering the catch), then this will send the product data back to the user
     res.status(200).json(allProductData);
   } catch (err) {
     res.status(500).json(err);
@@ -111,6 +113,7 @@ router.delete("/:id", async (req, res) => {
         id: req.params.id,
       },
     });
+    // gives a descriptive response if the client requested a missing resource
     if (!deleteResponse) {
       res.status(404).json({ message: "No product found with this id." });
       return;
