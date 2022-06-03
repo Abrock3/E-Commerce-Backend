@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
     });
     if (!allProductData) {
       res.status(404).json({ message: "No products found!" });
-      return;
     }
     res.status(200).json(allProductData);
   } catch (err) {
@@ -27,7 +26,6 @@ router.get("/:id", async (req, res) => {
     });
     if (!singleProductData) {
       res.status(404).json({ message: "No product found with this id!" });
-      return;
     }
     res.status(200).json(singleProductData);
   } catch (err) {
@@ -109,8 +107,19 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
-  // delete one product by its `id` value
+router.delete("/:id", async (req, res) => {
+  try {
+    await Product.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res
+      .status(200)
+      .json({ message: `Product number ${req.params.id} has been deleted.` });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
