@@ -35,11 +35,11 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     if (req.body.category_name) {
-      await Category.create(
+      const postResponse = await Category.create(
         { category_name: req.body.category_name },
         { fields: ["category_name"] }
       );
-      res.status(200).json({ message: "Category created." });
+      res.status(200).json(postResponse);
     } else {
       res.status(400).json({
         message:
@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     if (req.body.category_name) {
-      await Category.update(
+      const putResponse = await Category.update(
         { category_name: req.body.category_name },
         {
           where: {
@@ -62,9 +62,7 @@ router.put("/:id", async (req, res) => {
           },
         }
       );
-      res.status(200).json({
-        message: `Category number ${req.params.id} updated to ${req.body.category_name}.`,
-      });
+      res.status(200).json(putResponse);
     } else {
       res.status(400).json({
         message:
@@ -78,14 +76,12 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    await Category.destroy({
+    const deleteResponse = await Category.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res
-      .status(200)
-      .json({ message: `Category number ${req.params.id} has been deleted.` });
+    res.status(200).json(deleteResponse);
   } catch (err) {
     res.status(500).json(err);
   }

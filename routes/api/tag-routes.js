@@ -36,11 +36,11 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     if (req.body.tag_name) {
-      await Tag.create(
+      const postResponse = await Tag.create(
         { tag_name: req.body.tag_name },
         { fields: ["tag_name"] }
       );
-      res.status(200).json({ message: "Tag created." });
+      res.status(200).json(postResponse);
     } else {
       res.status(400).json({
         message:
@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     if (req.body.tag_name) {
-      await Tag.update(
+      const putResponse = await Tag.update(
         { tag_name: req.body.tag_name },
         {
           where: {
@@ -63,7 +63,7 @@ router.put("/:id", async (req, res) => {
           },
         }
       );
-      res.status(200).json({ message: `Tag number ${req.params.id} updated to ${req.body.tag_name}.` });
+      res.status(200).json(putResponse);
     } else {
       res.status(400).json({
         message:
@@ -77,14 +77,12 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    await Tag.destroy({
+    const deleteResponse = await Tag.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res
-      .status(200)
-      .json({ message: `Tag number ${req.params.id} has been deleted.` });
+    res.status(200).json(deleteResponse);
   } catch (err) {
     res.status(500).json(err);
   }
