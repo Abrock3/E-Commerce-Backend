@@ -11,13 +11,11 @@ Product.belongsTo(Category, {
 });
 
 Product.belongsToMany(Tag, {
-  through: { model: ProductTag, unique: false },
-  as: "products_in_category",
+  through: { model: ProductTag, foreignKey: "product_id" },
 });
 
 Tag.belongsToMany(Product, {
-  through: { model: ProductTag, unique: false },
-  as: "tags_in_product",
+  through: { model: ProductTag, foreignKey: "tag_id" },
 });
 
 module.exports = {
