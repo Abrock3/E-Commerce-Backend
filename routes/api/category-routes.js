@@ -5,13 +5,11 @@ const { Category, Product, ProductTag } = require("../../models");
 
 router.get("/", async (req, res) => {
   try {
+    // the response from mySQL gets stored in a const to be sent back to the user if all goes well
     const allCategoryData = await Category.findAll({
+      // this includes a join that uses products' category IDs to group matching products into each category object
       include: [{ model: Product }],
     });
-    if (!allCategoryData) {
-      res.status(404).json({ message: "No categories found." });
-      return;
-    }
     res.status(200).json(allCategoryData);
   } catch (err) {
     res.status(500).json(err);
@@ -38,6 +36,7 @@ router.post("/", async (req, res) => {
     if (req.body.category_name) {
       const postResponse = await Category.create(
         { category_name: req.body.category_name },
+        // the "fields" property defines what properties can be added in this post
         { fields: ["category_name"] }
       );
       if (!postResponse) {

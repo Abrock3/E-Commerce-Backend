@@ -9,9 +9,6 @@ router.get("/", async (req, res) => {
     const allProductData = await Product.findAll({
       include: [{ model: Category }, { model: Tag }],
     });
-    if (!allProductData) {
-      res.status(404).json({ message: "No products found." });
-    }
     res.status(200).json(allProductData);
   } catch (err) {
     res.status(500).json(err);
