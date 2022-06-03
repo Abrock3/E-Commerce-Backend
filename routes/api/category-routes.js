@@ -5,10 +5,11 @@ const { Category, Product, ProductTag } = require("../../models");
 
 router.get("/", async (req, res) => {
   try {
-    const allCategoryData = await Category.findAll();
+    const allCategoryData = await Category.findAll({
+      include: [{ model: Product }],
+    });
     if (!allCategoryData) {
-      res.status(404).json({ message: "No categories found!" });
-      return;
+      res.status(404).json({ message: "No categories found." });
     }
     res.status(200).json(allCategoryData);
   } catch (err) {
@@ -22,7 +23,7 @@ router.get("/:id", async (req, res) => {
       include: [{ model: Product }],
     });
     if (!singleCategoryData) {
-      res.status(404).json({ message: "No category found with this id!" });
+      res.status(404).json({ message: "No category found with this id." });
       return;
     }
     res.status(200).json(singleCategoryData);
@@ -38,7 +39,7 @@ router.post("/", async (req, res) => {
         { category_name: req.body.category_name },
         { fields: ["category_name"] }
       );
-      res.status(200).json({ message: "Category created!" });
+      res.status(200).json({ message: "Category created." });
     } else {
       res.status(400).json({
         message:
@@ -61,7 +62,9 @@ router.put("/:id", async (req, res) => {
           },
         }
       );
-      res.status(200).json({ message: "Category updated!" });
+      res.status(200).json({
+        message: `Category number ${req.params.id} updated to ${req.body.category_name}.`,
+      });
     } else {
       res.status(400).json({
         message:

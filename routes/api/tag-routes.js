@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
       include: [{ model: Product }],
     });
     if (!allTagData) {
-      res.status(404).json({ message: "No tags found!" });
+      res.status(404).json({ message: "No tags found." });
       return;
     }
     res.status(200).json(allTagData);
@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
       include: [{ model: Product }],
     });
     if (!singleTagData) {
-      res.status(404).json({ message: "No tag found with this id!" });
+      res.status(404).json({ message: "No tag found with this id." });
       return;
     }
     res.status(200).json(singleTagData);
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
         { tag_name: req.body.tag_name },
         { fields: ["tag_name"] }
       );
-      res.status(200).json({ message: "Tag created!" });
+      res.status(200).json({ message: "Tag created." });
     } else {
       res.status(400).json({
         message:
@@ -63,7 +63,7 @@ router.put("/:id", async (req, res) => {
           },
         }
       );
-      res.status(200).json({ message: `Tag number ${req.params.id} updated to ${req.body.tag_name}!` });
+      res.status(200).json({ message: `Tag number ${req.params.id} updated to ${req.body.tag_name}.` });
     } else {
       res.status(400).json({
         message:
