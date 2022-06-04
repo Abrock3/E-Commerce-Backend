@@ -155,10 +155,10 @@ dotenv: https://www.npmjs.com/package/dotenv
 
 Some code was provided by the instructional staff at the Georgia Tech full stack developer boot camp I'm attending.
 
-Insomnia was used to test and display the server's functions in screenshots and a video: https://insomnia.rest/
+Insomnia was used to test and display the server's functions in the provided screenshots and a video: https://insomnia.rest/
 
 ## License
-      
+
 Copyright 2022 Adam Brock
       
 This program is licensed using the MIT license: https://opensource.org/licenses/MIT.
