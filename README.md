@@ -28,7 +28,7 @@ In order to interact with the mock API server, the user will need to download an
 
 ## Usage
 
-Start the server by running the command "node server.js" from the CLI. You should see the message "App listening on port 3001!" in your CLI if all is well. Then, using insomnia(or something similar), you can use the defined routes  to manipulate the tables in the database(see below for the list of routes).
+Start the server by running the command "npm start" from the CLI. You should see the message "App listening on port 3001!" in your CLI if all is well (if not, review the error and revisit the installation instructions). Then, using insomnia (or something similar), you can use the defined routes  to manipulate the tables in the database(see below for the list of routes).
 
 There are 4 related tables in the database: category, product, tag, and product_tag. A graphical representation of the database structure is below (1s are the primary key side of a link, * denotes the foreign key side of a link):
 
