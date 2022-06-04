@@ -18,7 +18,9 @@ This application is a mock e-commerce backend, combining the node packages expre
 
 First, the user must install node, then run npm i from the CLI to install the necessary packages. 
 
-Then, install the mySQL CLI, log in to it and run source db/schema.sql to create the database (note, if you have a pre-existing local database named ecommerce_db, this will delete it).
+Next, change the .env.example file to match your mySQL username and password (root is commonly the username). Then, change its filename to .env (nothing should be before the .) Note: this will not expose your credentials.
+
+Then, install the mySQL CLI, log into it and run "source db/schema.sql" to create the database (note: if you have a pre-existing local database named ecommerce_db, this will delete it).
 
 Run the command "npm run seed" from the command line to create the tables and content within the database.
 

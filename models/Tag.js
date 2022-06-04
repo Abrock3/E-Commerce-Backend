@@ -4,6 +4,7 @@ const sequelize = require('../config/connection.js');
 
 class Tag extends Model {}
 
+// defines a table in our database, using a Class filled with properties that define the table's columns and their attributes.
 Tag.init(
   {
     id: {
