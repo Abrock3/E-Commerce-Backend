@@ -9,8 +9,10 @@ router.get("/", async (req, res) => {
       // will create a join in the SQL query that will include all products that have that tag
       include: [{ model: Product }],
     });
+    // responds back to the client with the requested data
     res.status(200).json(allTagData);
   } catch (err) {
+    // sends an error object with a 500 code to the client if an error is caught
     res.status(500).json(err);
   }
 });
@@ -21,9 +23,12 @@ router.get("/:id", async (req, res) => {
       include: [{ model: Product }],
     });
     if (!singleTagData) {
+      // if the data that gets sent back is empty, it's assumed that the resource is missing and the server responds to the user with a
+      // verbose message to that effect
       res.status(404).json({ message: "No tag found with this id." });
       return;
     }
+    // responds back to the client with the requested data
     res.status(200).json(singleTagData);
   } catch (err) {
     res.status(500).json(err);
@@ -88,6 +93,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const deleteResponse = await Tag.destroy({
       where: {
+        // pulls the id parameter out of the req object and uses it in the query to find and delete the row
         id: req.params.id,
       },
     });

@@ -54,6 +54,7 @@ http://localhost:3001/api/products/#
 ```
 http://localhost:3001/api/tags/#
 ```
+
 Post routes, used to add data to the database (a JSON body must be included; sample JSON bodies are provided for each):
 ```
 http://localhost:3001/api/categories/
@@ -86,6 +87,7 @@ Sample JSON:
         "tag_name": "bronze"
     }
 ```
+
 Put routes, used to update information in specific rows (replace the # with a valid id. A JSON body must be included; sample JSON bodies are provided for each):
 ```
 http://localhost:3001/api/categories/#
@@ -118,6 +120,7 @@ Sample JSON:
         "tag_name": "copper"
     }
 ```
+
 Delete routes, used to remove a row from a table at the requested row (the user must replace the # with a valid id)
 ```
 http://localhost:3001/api/categories/#
@@ -128,7 +131,9 @@ http://localhost:3001/api/products/#
 ```
 http://localhost:3001/api/tags/#
 ```
-Screenshots of insomnia sending queries to the server:
+
+Screenshots of insomnia sending queries to the server and responding:
+
 ![Screenshot](assets/images/Screenshot1.jpg?raw=true "Screenshot 1")
 
 ![Screenshot](assets/images/Screenshot2.jpg?raw=true "Screenshot 2")
@@ -137,6 +142,7 @@ Screenshots of insomnia sending queries to the server:
 
 
 Video of each route manipulating the database (featuring insomnia): https://drive.google.com/file/d/1oHjsnQHeyuFXJRO7uTiQ2P4hmkfulO6L/view?usp=sharing
+
 ## Credits
 
 The following npm packages were used to create this project:
