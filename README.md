@@ -58,7 +58,7 @@ Post routes, used to add data to the database (a JSON body must be included; sam
 ```
 http://localhost:3001/api/categories/
 ```
-    Sample JSON:
+Sample JSON:
 ```
     {
         "category_name": "tools" 
@@ -67,7 +67,7 @@ http://localhost:3001/api/categories/
 ```
 http://localhost:3001/api/products/
 ```
-    Sample JSON:
+Sample JSON:
 ```
     {
         "product_name": "Basketball",
@@ -80,7 +80,7 @@ http://localhost:3001/api/products/
 ```
 http://localhost:3001/api/tags/
 ```
-    Sample JSON:
+Sample JSON:
 ```
     {
         "tag_name": "bronze"
@@ -90,7 +90,7 @@ Put routes, used to update information in specific rows (replace the # with a va
 ```
 http://localhost:3001/api/categories/#
 ```
-    Sample JSON:
+Sample JSON:
 ```
     {
         "category_name": "Gardening" 
@@ -99,7 +99,7 @@ http://localhost:3001/api/categories/#
 ```
 http://localhost:3001/api/products/#
 ```
-    Sample JSON:
+Sample JSON:
 ```
     {
         "product_name": "Nutcracker",
@@ -112,7 +112,7 @@ http://localhost:3001/api/products/#
 ```
 http://localhost:3001/api/tags/#
 ```
-    Sample JSON:
+Sample JSON:
 ```
     {
         "tag_name": "copper"
